@@ -10,21 +10,18 @@ const main = async () => {
 
       let waveCount;
       waveCount = await waveContract.getTotalWaves();
+      console.log(waveCount.toNumber());
 
-      let waveTxn = await waveContract.wave();
+      let waveTxn = await waveContract.wave("A message!");
       await waveTxn.wait();
 
-      waveCount = await waveContract.getTotalWaves();
-      // owner以外のアドレスから関数を呼び出して実行させる。
-      waveTxn = await waveContract.connect(randomPerson1).wave();
+      const [_, randomPerson] = await hre.ethers.getSigners();
+      // 別のアカウントから実行
+      waveTxn = await waveContract.connect(randomPerson).wave("Another message!");
       await waveTxn.wait();
-
-      waveCount = await waveContract.getTotalWaves();
-
-      waveTxn = await waveContract.connect(randomPerson2).wave();
-      await waveTxn.wait();
-
-      waveCount = await waveContract.getTotalWaves();
+      // 全てのウェーブを取得する。
+      let allWaves = await waveContract.getAllWaves();
+      console.log(allWaves);
 };
 
 const runMain = async () => {
