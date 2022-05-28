@@ -4,6 +4,9 @@
 ### ローカル環境でイーサリアムネットワークを立ち上げるコマンド
  `npx hardhat node`
 
+### ローカル環境でテスト用のスクリプトファイルを実行するコマンド
+ `npx hardhat run scripts/run.js`
+
 ### ローカル環境でデプロイ用のスクリプトファイルを実行するコマンド
  `npx hardhat run scripts/deploy.js --network localhost`
 
