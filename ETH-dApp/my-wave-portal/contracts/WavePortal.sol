@@ -25,7 +25,7 @@ contract WavePortal {
       }
 
       function wave(string memory _message) public {
-            require(lastWavedAt[msg.sender] + 15 minutes < block.timestamp, "Wait 15m");
+            require(lastWavedAt[msg.sender] + 30 seconds < block.timestamp, "Wait 30s");
 
             lastWavedAt[msg.sender] = block.timestamp;
 
@@ -38,7 +38,7 @@ contract WavePortal {
             waves.push(Wave(msg.sender, _message, block.timestamp));
             
             if (seed <= 50) {
-                  uint256 prizeAmount = 0.0001 ether;
+                  uint256 prizeAmount = 0.00001 ether;
                   require(
                         prizeAmount <= address(this).balance,
                         "Trying to withdraw more money than the contract has."

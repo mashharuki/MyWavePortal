@@ -4,13 +4,14 @@ import abi from "./uitls/WavePortal.json";
 import './App.css';
 
 const contractABI = abi.abi;
-const contractAddress = "0x3b3eDEC2866B0b165d9dC5Fb09d9AD1B743FbeBF";
+const contractAddress = "0x7C7Bd8BC7cEBeb774FC2E94CA8e7f9c0a752e682";
 
 function App() {
   // ステート変数
   const [currentAccount, setCurrentAccount] = useState("");
   const [messageValue, setMessageValue] = useState("");
   const [allWaves, setAllWaves] = useState([]);
+  const [waveBalance, setWaveBalance] = useState(0);
   console.log("currentAccount: ", currentAccount);
 
   // ウォレット接続チェック
@@ -67,6 +68,9 @@ function App() {
             };
           });
           setAllWaves(wavesCleaned);
+          // 現在の資産額を取得してセットする。
+          let contractBalance = await provider.getBalance(wavePortalContract.address);
+          setWaveBalance(ethers.utils.formatEther(contractBalance));
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -147,6 +151,9 @@ function App() {
         // getTotalWavesメソッドを呼び出す
         let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
+        // コントラクトの残高を取得する。
+        let contractBalance = await provider.getBalance(wavePortalContract.address);
+        console.log("Contract balance:", ethers.utils.formatEther(contractBalance));
         // waveメソッドを呼び出して実行する。
         const waveTxn = await wavePortalContract.wave(messageValue, {
           gasLimit: 300000,
@@ -156,6 +163,17 @@ function App() {
         console.log("Mined -- ", waveTxn.hash);
         count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
+
+        let contractBalance_post = await provider.getBalance(wavePortalContract.address);
+        /* コントラクトの残高が減っていることを確認 */
+        if (contractBalance_post < contractBalance) {
+          /* 減っていたら下記を出力 */
+          console.log("User won ETH!");
+        } else {
+          console.log("User didn't win ETH.");
+        }
+        console.log("Contract balance after wave:", ethers.utils.formatEther(contractBalance_post));
+        setWaveBalance(ethers.utils.formatEther(contractBalance_post));
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -173,7 +191,7 @@ function App() {
           </span> { " " }
           WELCOME!
         </div>
-        <div className="bio">
+        <div >
           イーサリアムウォレットを接続して、メッセージを作成したら、
           <span role="img" aria-label="hand-wave">
             👋
@@ -182,6 +200,9 @@ function App() {
           <span role="img" aria-label="shine">
             ✨
           </span>
+        </div>
+        <div className="balance">
+          現在のコントラクトの資金： <b>{waveBalance} ETH</b>
         </div>
         <button className="waveButton" onClick={wave}>
           Wave at Me
