@@ -25,7 +25,7 @@
       Contract deployed by:  0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072
  ```
 
- etherscanは<a href="https://etherscan.io/address/0xd09dFE5025FB25000aA22021F7355656cd10EB17">こちら</a>！！
+ etherscanは<a href="https://goerli.etherscan.io/address/0x3b3eDEC2866B0b165d9dC5Fb09d9AD1B743FbeBF">こちら</a>！！
 
  ### gitのリモートファイルを削除するコマンド
   `git rm --cached hardhat.config.js`

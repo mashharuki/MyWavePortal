@@ -4,7 +4,7 @@ import abi from "./uitls/WavePortal.json";
 import './App.css';
 
 const contractABI = abi.abi;
-const contractAddress = "0x10545794Ac5b7F3d38F2C895F4d37eF8746E52e1";
+const contractAddress = "0x3b3eDEC2866B0b165d9dC5Fb09d9AD1B743FbeBF";
 
 function App() {
   // ステート変数
