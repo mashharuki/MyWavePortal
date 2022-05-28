@@ -28,8 +28,12 @@
       Contract deployed by:  0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072
  ```
 
- etherscanは<a href="https://goerli.etherscan.io/address/0x3b3eDEC2866B0b165d9dC5Fb09d9AD1B743FbeBF">こちら</a>！！
+ etherscanは<a href="https://goerli.etherscan.io/address/0x7C7Bd8BC7cEBeb774FC2E94CA8e7f9c0a752e682">こちら</a>！！
 
  ### gitのリモートファイルを削除するコマンド
   `git rm --cached hardhat.config.js`
+
+### Vercelの公式サイト
+
+<a href="https://vercel.com/">https://vercel.com/</a>
 
